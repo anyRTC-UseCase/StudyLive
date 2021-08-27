@@ -95,6 +95,7 @@ class RtcManager private constructor(){
             setChannelProfile(Constants.CHANNEL_PROFILE_LIVE_BROADCASTING)
             setClientRole(Constants.CLIENT_ROLE_AUDIENCE)
             joinChannel(rtcToken, roomId, "", userId)
+			setEnableSpeakerphone(true)
         }
         rtmChannel?.leave(null)
 
