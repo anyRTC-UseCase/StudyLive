@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="15dp"
+    android:layout_marginEnd="15dp"
+    android:background="@drawable/user_item"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/avatar"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        app:shapeAppearance="@style/RoundStyle" />
+
+    <TextView
+        android:id="@+id/nickname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_weight="1"
+        android:textColor="#171717"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/seat_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#BCBCBC"
+        android:textSize="12sp"
+        tools:text="No.1" />
+</androidx.appcompat.widget.LinearLayoutCompat>

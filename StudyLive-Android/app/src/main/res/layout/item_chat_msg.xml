@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="15dp"
+    android:paddingTop="15dp"
+    android:paddingEnd="15dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/chat_avatar"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:padding="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearance="@style/CircleStyle"
+        app:strokeWidth="1dp" />
+
+    <TextView
+        android:id="@+id/chat_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:textColor="#BCBCBC"
+        android:textSize="11sp"
+        app:layout_constraintStart_toEndOf="@id/chat_avatar"
+        app:layout_constraintTop_toTopOf="@id/chat_avatar"
+        tools:text="Tom" />
+
+    <TextView
+        android:id="@+id/chat_flag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:background="@drawable/shape_chat_flag_bg"
+        android:paddingStart="5dp"
+        android:paddingTop="2dp"
+        android:paddingEnd="5dp"
+        android:paddingBottom="2dp"
+        android:textColor="@color/white"
+        android:textSize="8sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/chat_nickname"
+        app:layout_constraintStart_toEndOf="@id/chat_nickname"
+        app:layout_constraintTop_toTopOf="@id/chat_nickname"
+        tools:ignore="SmallSp"
+        tools:text="No.1 Seated" />
+
+    <TextView
+        android:id="@+id/chat_msg"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/chat_nickname"
+        app:layout_constraintTop_toBottomOf="@id/chat_nickname"
+        tools:text="8 月 5 日，自动驾驶芯片企业地平线与国内激光雷达龙头禾赛科技达成战略合作，双方将基于征程 5 芯片和最新固态激光雷达展开联合开发与适配，为面向 L4 和 L5 级别的自动驾驶提供完整解决方案。" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/chat_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:maxWidth="203dp"
+        android:maxHeight="203dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toRightOf="@id/chat_avatar"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chat_msg"
+        app:shapeAppearance="@style/RoundStyle"
+        tools:src="@mipmap/m_logo" />
+</androidx.constraintlayout.widget.ConstraintLayout>

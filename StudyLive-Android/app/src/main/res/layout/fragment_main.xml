@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f3f3f3"
+    tools:context=".activity.MainActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:text="@string/app_name"
+        android:textColor="#171717"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/smart_refresh"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <io.anyrtc.studyroom.widget.SmartRefreshRewrite
+        android:id="@+id/smart_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title">
+
+        <io.anyrtc.videolive.view.AnyRefreshHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp" />
+    </io.anyrtc.studyroom.widget.SmartRefreshRewrite>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/internet_lost_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/smart_refresh"
+        app:layout_constraintLeft_toLeftOf="@id/smart_refresh"
+        app:layout_constraintRight_toRightOf="@id/smart_refresh"
+        app:layout_constraintTop_toTopOf="@id/smart_refresh"
+        app:layout_constraintVertical_bias=".35"
+        app:srcCompat="@drawable/internet_lost" />
+
+    <TextView
+        android:id="@+id/internet_lost_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:text="@string/internetLost"
+        android:textColor="#666666"
+        android:textSize="15sp"
+        app:layout_constraintLeft_toLeftOf="@id/internet_lost_icon"
+        app:layout_constraintRight_toRightOf="@id/internet_lost_icon"
+        app:layout_constraintTop_toBottomOf="@id/internet_lost_icon" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/internet_lost_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="internet_lost_icon,internet_lost_title" />
+</androidx.constraintlayout.widget.ConstraintLayout>

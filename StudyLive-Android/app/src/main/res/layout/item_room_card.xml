@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@drawable/shape_card_bg"
+    android:paddingStart="12dp"
+    android:paddingTop="6dp"
+    android:paddingEnd="12dp"
+    android:paddingBottom="8dp">
+
+    <TextView
+        android:id="@+id/num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FF4316"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="1" />
+
+    <TextView
+        android:id="@+id/suffix"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="@string/num_suffix"
+        android:textColor="#171717"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/num"
+        app:layout_constraintStart_toEndOf="@id/num"
+        app:layout_constraintTop_toTopOf="@id/num" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vertical_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".5" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/visitor_1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/vertical_guide"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearance="@style/CircleStyle"
+        app:srcCompat="@drawable/item_icon_empty_seat" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/visitor_2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="4dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/vertical_guide"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/visitor_1"
+        app:shapeAppearance="@style/CircleStyle"
+        app:srcCompat="@drawable/item_icon_empty_seat" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/visitor_3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/vertical_guide"
+        app:layout_constraintTop_toBottomOf="@id/visitor_1"
+        app:shapeAppearance="@style/CircleStyle"
+        app:srcCompat="@drawable/item_icon_empty_seat" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/visitor_4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/vertical_guide"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/visitor_2"
+        app:shapeAppearance="@style/CircleStyle"
+        app:srcCompat="@drawable/item_icon_empty_seat" />
+
+    <View
+        android:id="@+id/dividing_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="12dp"
+        android:background="#F1EFE5"
+        app:layout_constraintTop_toBottomOf="@id/visitor_4" />
+
+    <TextView
+        android:id="@+id/join"
+        android:layout_width="58dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="9dp"
+        android:background="@drawable/shape_join_bg"
+        android:gravity="center"
+        android:text="@string/join"
+        android:textColor="#FF4316"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dividing_line" />
+</androidx.constraintlayout.widget.ConstraintLayout>

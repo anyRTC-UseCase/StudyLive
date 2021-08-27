@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<io.anyrtc.studyroom.layout.VideosLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/videos_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#171717">
+
+    <include
+        android:id="@+id/video_1"
+        layout="@layout/layout_video_content" />
+
+    <include
+        android:id="@+id/video_2"
+        layout="@layout/layout_video_content" />
+
+    <include
+        android:id="@+id/video_3"
+        layout="@layout/layout_video_content" />
+
+    <include
+        android:id="@+id/video_4"
+        layout="@layout/layout_video_content" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        tools:text="1号自习室" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/list_6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|end"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/img1"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:background="@android:color/transparent"
+            app:shapeAppearance="@style/CircleStyle" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/img2"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="5dp"
+            android:background="@android:color/transparent"
+            app:shapeAppearance="@style/CircleStyle" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/img3"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="5dp"
+            android:background="@android:color/transparent"
+            app:shapeAppearance="@style/CircleStyle" />
+
+        <TextView
+            android:id="@+id/watching_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/defAudience"
+            android:textColor="#BCBCBC"
+            android:textSize="11sp" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/chat_7"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <io.anyrtc.videolive.view.ChatRecyclerView
+                android:id="@+id/chat_recycle"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="16dp"
+                android:fadingEdgeLength="26dp"
+                android:requiresFadingEdge="vertical"
+                android:scrollbars="none"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/bottom_point"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/notify_linear"
+                android:layout_width="157dp"
+                android:layout_height="60dp"
+                android:gravity="right"
+                android:orientation="vertical"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/bottom_point"
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:layout_marginBottom="53dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent" />
+
+            <View
+                android:id="@+id/visitor_chat_input_bg"
+                android:layout_width="230dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginBottom="25dp"
+                android:background="@drawable/shape_chat_bg"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/visitor_chat_hints"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:ellipsize="end"
+                android:ems="8"
+                android:maxLines="1"
+                android:text="@string/saySomething"
+                android:textColor="#BCBCBC"
+                android:textSize="11sp"
+                app:layout_constraintBottom_toBottomOf="@id/visitor_chat_input_bg"
+                app:layout_constraintLeft_toLeftOf="@id/visitor_chat_input_bg"
+                app:layout_constraintTop_toTopOf="@id/visitor_chat_input_bg" />
+
+            <ImageView
+                android:id="@+id/visitor_chat_send_img"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/icon_send_img"
+                app:layout_constraintBottom_toBottomOf="@id/visitor_chat_input_bg"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintRight_toRightOf="@id/visitor_chat_input_bg"
+                app:layout_constraintTop_toTopOf="@id/visitor_chat_input_bg" />
+
+            <TextView
+                android:id="@+id/visitor_participate"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/shape_red_bg"
+                android:gravity="center"
+                android:paddingStart="7dp"
+                android:paddingEnd="15dp"
+                android:text="@string/participate"
+                android:textColor="@color/white"
+                app:drawableStartCompat="@drawable/icon_participate"
+                app:layout_constraintBottom_toBottomOf="@id/visitor_chat_input_bg"
+                app:layout_constraintLeft_toRightOf="@id/visitor_chat_input_bg"
+                app:layout_constraintTop_toTopOf="@id/visitor_chat_input_bg" />
+
+            <ImageView
+                android:id="@+id/visitor_leave"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/shape_chat_bg"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/icon_close"
+                app:layout_constraintBottom_toBottomOf="@id/visitor_chat_input_bg"
+                app:layout_constraintLeft_toRightOf="@id/visitor_participate"
+                app:layout_constraintTop_toTopOf="@id/visitor_chat_input_bg" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/visitor_chat_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="visitor_chat_hints,visitor_chat_input_bg,visitor_chat_send_img,visitor_participate,visitor_leave" />
+
+            <View
+                android:id="@+id/sitting_chat_input_bg"
+                android:layout_width="179dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/shape_chat_bg"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/sitting_chat_hints"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:ellipsize="end"
+                android:ems="8"
+                android:maxLines="1"
+                android:text="@string/saySomething"
+                android:textColor="#BCBCBC"
+                android:textSize="11sp"
+                app:layout_constraintBottom_toBottomOf="@id/sitting_chat_input_bg"
+                app:layout_constraintStart_toStartOf="@id/sitting_chat_input_bg"
+                app:layout_constraintTop_toTopOf="@id/sitting_chat_input_bg" />
+
+            <ImageView
+                android:id="@+id/sitting_chat_send_img"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/icon_send_img"
+                app:layout_constraintBottom_toBottomOf="@id/sitting_chat_input_bg"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintRight_toRightOf="@id/sitting_chat_input_bg"
+                app:layout_constraintTop_toTopOf="@id/sitting_chat_input_bg" />
+
+            <View
+                android:id="@+id/sitting_chat_btn_bg"
+                android:layout_width="142dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/shape_chat_bg"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/sitting_mike"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:background="@android:color/transparent"
+                android:button="@drawable/selector_mike"
+                android:checked="true"
+                app:layout_constraintBottom_toBottomOf="@id/sitting_chat_btn_bg"
+                app:layout_constraintLeft_toLeftOf="@id/sitting_chat_btn_bg"
+                app:layout_constraintRight_toLeftOf="@id/sitting_mute_all"
+                app:layout_constraintTop_toTopOf="@id/sitting_chat_btn_bg" />
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/sitting_mute_all"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:background="@android:color/transparent"
+                android:button="@drawable/selector_mute_all"
+                app:layout_constraintBottom_toBottomOf="@id/sitting_chat_btn_bg"
+                app:layout_constraintLeft_toRightOf="@id/sitting_mike"
+                app:layout_constraintRight_toLeftOf="@id/sitting_switch_camera"
+                app:layout_constraintTop_toTopOf="@id/sitting_chat_btn_bg" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/sitting_switch_camera"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                app:layout_constraintBottom_toBottomOf="@id/sitting_chat_btn_bg"
+                app:layout_constraintLeft_toRightOf="@id/sitting_mute_all"
+                app:layout_constraintRight_toLeftOf="@id/sitting_exit"
+                app:layout_constraintTop_toTopOf="@id/sitting_chat_btn_bg"
+                app:srcCompat="@drawable/sitting_switch_camera" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/sitting_exit"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                app:layout_constraintBottom_toBottomOf="@id/sitting_chat_btn_bg"
+                app:layout_constraintLeft_toRightOf="@id/sitting_switch_camera"
+                app:layout_constraintRight_toRightOf="@id/sitting_chat_btn_bg"
+                app:layout_constraintTop_toTopOf="@id/sitting_chat_btn_bg"
+                app:srcCompat="@drawable/sitting_exit" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/sitting_chat_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:constraint_referenced_ids="sitting_chat_input_bg,sitting_chat_hints,sitting_chat_send_img,sitting_chat_btn_bg,sitting_mike,sitting_mute_all,sitting_switch_camera,sitting_exit" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/bottom_sheet_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:behavior_hideable="true"
+            app:behavior_peekHeight="0dp"
+            app:layout_behavior="@string/bottom_sheet_behavior">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_tab_bg"
+                app:tabIndicatorColor="#FF4316"
+                app:tabSelectedTextColor="#FF4316"
+                app:tabTextColor="#757575" />
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/pager"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/white" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</io.anyrtc.studyroom.layout.VideosLayout>
