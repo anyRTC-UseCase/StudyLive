@@ -1,0 +1,6 @@
+framework module Pods_StudyRoom_iOS {
+  umbrella header "Pods-StudyRoom-iOS-umbrella.h"
+
+  export *
+  module * { export * }
+}
