@@ -10,7 +10,7 @@ StudyLive是anyRTC开发的示例项目，演示了如何通过anyRTC云服务�
 
 ## 效果展示
 
-![1](C:\Users\lenovo\Desktop\9.png)
+![1](https://github.com/anyRTC-UseCase/StudyLive/blob/master/E322FC4A-3607-4DBB-81C4-8D9D6C1653F4.png)
 
 ### 主播端调用图
 
