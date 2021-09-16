@@ -1,7 +1,7 @@
 # StudyLive
 ## 项目概述
 
-StudyLive是anyRTC开发的示例项目，演示了如何通过anyRTC云服务，配合anyRTC RTC SDK、anyRTC RTM SDK、anyRTC播放插件，实现在线自习室的场景。
+StudyLive是anyRTC开发的示例项目，演示了如何通过anyRTC云服务，配合anyRTC RTC SDK、anyRTC RTM SDK，实现在线自习室的场景。
 
 ## 平台兼容
 
@@ -12,7 +12,7 @@ StudyLive是anyRTC开发的示例项目，演示了如何通过anyRTC云服务�
 
 ![1](https://github.com/anyRTC-UseCase/StudyLive/blob/master/E322FC4A-3607-4DBB-81C4-8D9D6C1653F4.png)
 
-### 主播端调用图
+### 上麦用户调用图
 
 ![host](https://github.com/anyRTC-UseCase/VideoLive/blob/main/host.png)
 
@@ -28,17 +28,17 @@ StudyLive是anyRTC开发的示例项目，演示了如何通过anyRTC云服务�
 | leaveChannel                       | 离开频道                             |
 | destory                            | 释放引擎                             |
 
-### 游客端调用图
+### 观众调用图
 
 ![audience](https://github.com/anyRTC-UseCase/VideoLive/blob/main/audience.png)
 
-游客RTC使用的方法：
+观众RTC使用的方法：
 
 | 方法                               | 描述                                 |
 | ---------------------------------- | ------------------------------------ |
 | create                             | 创建RTC                              |
 | setChannelProfile:LiveBroadcasting | 设置频道场景为直播模式               |
-| setClientRole:Broadcaster          | 设置直播场景下的角色为主播           |
+| setClientRole:Audience             | 设置直播场景下的角色为观众           |
 | setAudioProfile                    | 设置音频属性，建议码率不要超过48kbps |
 | joinChannel                        | 加入频道                             |
 | leaveChanel                        | 离开频道                             |
