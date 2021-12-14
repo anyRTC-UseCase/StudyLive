@@ -136,6 +136,8 @@ class ARImageCell: UITableViewCell {
     }
 }
 
+var blackList = [String]()
+
 class LogViewController: UITableViewController {
 
     private lazy var list = [ARLogModel]()
@@ -157,22 +159,50 @@ class LogViewController: UITableViewController {
         let logModel = list[indexPath.row]
         if logModel.status == .image {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ImageCell", for: indexPath) as! ARImageCell
+            cell.selectionStyle = .none
             cell.update(logModel: logModel)
             return cell
         } else if logModel.status == .text {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ChatCell", for: indexPath) as! ARChatCell
+            cell.selectionStyle = .none
             cell.update(logModel: logModel)
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "LogCell", for: indexPath) as! LogCell
             cell.update(logModel: logModel)
+            cell.selectionStyle = .none
             return cell
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let logModel = list[indexPath.row]
+        if logModel.status == .image || logModel.status == .text{
+            if logModel.uid != UserDefaults.string(forKey: .uid) {
+                UIAlertController.showAlert(in: self, withTitle: "拉黑", message: "屏蔽该用户发送的消息", cancelButtonTitle: "取消", destructiveButtonTitle: nil, otherButtonTitles: ["确定"]) { (alertVc, action, index) in
+                    if index == 2 {
+                        blackList.append(logModel.uid!)
+                        for (listIndex, model) in self.list.enumerated() {
+                            if model.uid == logModel.uid {
+                                self.list.remove(at: listIndex)
+                            }
+                        }
+                        tableView.reloadData()
+                    }
+                }
+            }
         }
     }
 }
 
 extension LogViewController {
     func log(logModel: ARLogModel) {
+        if logModel.status == .text || logModel.status == .image {
+            if blackList.contains(logModel.uid ?? "") {
+                return
+            }
+        }
+        
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.25) {
             self.list.append(logModel)
             let index = IndexPath(row: self.list.count - 1, section: 0)

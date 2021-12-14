@@ -31,7 +31,9 @@
 		6378898926B4247100EEC15E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6378898826B4247100EEC15E /* AppDelegate.swift */; };
 		6378899226B4247200EEC15E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6378899126B4247200EEC15E /* Assets.xcassets */; };
 		6378899526B4247200EEC15E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6378899326B4247200EEC15E /* LaunchScreen.storyboard */; };
+		63AB4637276877B9005BEF89 /* ARBaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB4636276877B9005BEF89 /* ARBaseNavigationController.swift */; };
 		63B8F99626C28504009C6DC7 /* ARMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B8F99526C28504009C6DC7 /* ARMemberViewController.swift */; };
+		63BDDC7426DDCF6100CD4FD4 /* ARReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BDDC7326DDCF6100CD4FD4 /* ARReportViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,7 +64,9 @@
 		6378899126B4247200EEC15E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6378899426B4247200EEC15E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6378899626B4247200EEC15E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		63AB4636276877B9005BEF89 /* ARBaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARBaseNavigationController.swift; sourceTree = "<group>"; };
 		63B8F99526C28504009C6DC7 /* ARMemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARMemberViewController.swift; sourceTree = "<group>"; };
+		63BDDC7326DDCF6100CD4FD4 /* ARReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARReportViewController.swift; sourceTree = "<group>"; };
 		8B05D8BB83E9FE99E2D0B166 /* Pods_StudyRoom_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudyRoom_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A333F64E197F408E25DD90D9 /* Pods-StudyRoom-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyRoom-iOS.debug.xcconfig"; path = "Target Support Files/Pods-StudyRoom-iOS/Pods-StudyRoom-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		F7288C79E2F9FB39B3B412D0 /* Pods-StudyRoom-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyRoom-iOS.release.xcconfig"; path = "Target Support Files/Pods-StudyRoom-iOS/Pods-StudyRoom-iOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -159,6 +163,7 @@
 				6374355326BA351C002FF516 /* Common */,
 				6378898826B4247100EEC15E /* AppDelegate.swift */,
 				6374355026BA3490002FF516 /* ARTabBarController.swift */,
+				63AB4636276877B9005BEF89 /* ARBaseNavigationController.swift */,
 				6374354526BA28C9002FF516 /* Main.storyboard */,
 				637435AC26BCE59E002FF516 /* Log.storyboard */,
 				6378899126B4247200EEC15E /* Assets.xcassets */,
@@ -184,6 +189,7 @@
 				6374357326BA37AC002FF516 /* ARVideoViewController.swift */,
 				637435A926BCE57D002FF516 /* LogViewController.swift */,
 				63B8F99526C28504009C6DC7 /* ARMemberViewController.swift */,
+				63BDDC7326DDCF6100CD4FD4 /* ARReportViewController.swift */,
 			);
 			path = Video;
 			sourceTree = "<group>";
@@ -315,7 +321,9 @@
 				637435AA26BCE57D002FF516 /* LogViewController.swift in Sources */,
 				6374357426BA37AC002FF516 /* ARVideoViewController.swift in Sources */,
 				6374357126BA35B8002FF516 /* ARMainViewController.swift in Sources */,
+				63AB4637276877B9005BEF89 /* ARBaseNavigationController.swift in Sources */,
 				6374355F26BA351C002FF516 /* ARBaseViewController.swift in Sources */,
+				63BDDC7426DDCF6100CD4FD4 /* ARReportViewController.swift in Sources */,
 				6374356526BA351C002FF516 /* ARVideoView.swift in Sources */,
 				6374356E26BA359F002FF516 /* AREditViewController.swift in Sources */,
 				6374356D26BA359F002FF516 /* ARSetupViewController.swift in Sources */,
@@ -466,6 +474,7 @@
 				CODE_SIGN_ENTITLEMENTS = "StudyRoom-iOS/StudyRoom-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 5543CP4MRT;
 				INFOPLIST_FILE = "StudyRoom-iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -494,6 +503,7 @@
 				CODE_SIGN_ENTITLEMENTS = "StudyRoom-iOS/StudyRoom-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 5543CP4MRT;
 				INFOPLIST_FILE = "StudyRoom-iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

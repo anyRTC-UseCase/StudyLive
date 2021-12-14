@@ -85,6 +85,16 @@ extension ARMemberView: UITableViewDelegate, UITableViewDataSource {
         cell?.selectionStyle = .none
         return cell!
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if cell.responds(to:#selector(setter: UIView.layoutMargins)) {
+            cell.layoutMargins = UIEdgeInsets.zero
+        }
+        
+        if cell.responds(to: #selector(setter: UITableViewCell.separatorInset)) {
+            cell.separatorInset = UIEdgeInsets.zero
+        }
+    }
 }
 
 class ARMemberViewController: UIViewController {

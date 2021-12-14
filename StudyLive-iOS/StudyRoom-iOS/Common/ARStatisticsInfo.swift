@@ -59,6 +59,16 @@ struct ARRoomInfoModel {
     }
 }
 
+class ARReportItem: NSObject {
+    var title: String?
+    var isSelected: Bool = false
+    
+    init(text: String, selected: Bool) {
+        title = text
+        isSelected = selected
+    }
+}
+
 struct ARMicModel {
     var avatar: String?
     var seatTime: NSInteger = 0

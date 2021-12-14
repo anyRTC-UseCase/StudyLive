@@ -10,13 +10,13 @@ import ARtcKit
 import ARtmKit
 import SwiftyJSON
 import SVProgressHUD
+import AttributedString
 
 var infoVideoModel: ARRoomInfoModel!
 var rtcKit: ARtcEngineKit!
 var rtmEngine: ARtmKit!
 
 class ARVideoViewController: ARBaseViewController {
-    
     @IBOutlet weak var roomLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var roomTextField: UITextField!
@@ -67,7 +67,13 @@ class ARVideoViewController: ARBaseViewController {
     }
     
     private func initializeUI() {
-        roomLabel.text = infoVideoModel.roomName
+        roomLabel.attributed.text = .init("""
+          \(infoVideoModel.roomName!) \(.image(#imageLiteral(resourceName: "icon_report"), .custom(size: CGSize(width: 18, height: 18))), action: reportRoom)
+         """)
+        titleLabel.attributed.text = .init("""
+         \(infoVideoModel.roomName!, .font(UIFont(name: PingFangBold, size: 16)!), .foreground(UIColor.white)) \(.image(#imageLiteral(resourceName: "icon_report"), .custom(size: CGSize(width: 18, height: 18))), action: reportRoom)
+         """)
+
         roomTextField.rightView = rightButton
         roomTextField.rightViewMode = .always
         
@@ -393,33 +399,44 @@ class ARVideoViewController: ARBaseViewController {
         self.present(memberVc, animated: true, completion: nil)
     }
     
+    @objc func reportRoom() {
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let reportVc = storyboard.instantiateViewController(withIdentifier: "StudyRoom_Report")
+        self.present(reportVc, animated: true, completion: nil)
+    }
+    
     @objc func destroyRoom() {
-        destroy = true
-        leaveXHToast(reason: reason)
-        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(destroyRoom), object: nil)
-        dismissLoadingView()
         
-        if allowRotation {
-            allowRotation = false
-            setNewOrientation()
+        if !destroy {
+            destroy.toggle()
+            leaveXHToast(reason: reason)
+            NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(destroyRoom), object: nil)
+            dismissLoadingView()
+            
+            if allowRotation {
+                allowRotation = false
+                setNewOrientation()
+            }
+            
+            let topVc = topViewController()
+            if !(topVc is ARVideoViewController) {
+                topVc.dismiss(animated: false, completion: nil)
+            }
+            
+            ARSourceTimer.stop()
+            let dic: NSDictionary! = ["cmd": "leaveTip", "userName": UserDefaults.string(forKey: .userName) as Any, "avatar": UserDefaults.string(forKey: .avatar) as Any]
+            sendChannelMessage(text: getJSONStringFromDictionary(dictionary: dic))
+            leaveRoom(roomId: infoVideoModel.roomId!)
+            
+            leaveChannel()
+            ARtcEngineKit.destroy()
+            
+            rtmChannel?.channelDelegate = nil
+            rtmEngine.destroyChannel(withId: (infoVideoModel.roomId)!)
+            rtmEngine.aRtmDelegate = nil
+            rtmEngine.logout(completion: nil)
+            self.dismiss(animated: false, completion: nil)
         }
-        
-        let topVc = topViewController()
-        if !(topVc is ARVideoViewController) {
-            topVc.dismiss(animated: false, completion: nil)
-        }
-        
-        ARSourceTimer.stop()
-        let dic: NSDictionary! = ["cmd": "leaveTip", "userName": UserDefaults.string(forKey: .userName) as Any, "avatar": UserDefaults.string(forKey: .avatar) as Any]
-        sendChannelMessage(text: getJSONStringFromDictionary(dictionary: dic))
-        leaveRoom(roomId: infoVideoModel.roomId!)
-        
-        leaveChannel()
-        ARtcEngineKit.destroy()
-        rtmEngine.destroyChannel(withId: (infoVideoModel.roomId)!)
-        rtmEngine.aRtmDelegate = nil
-        rtmEngine.logout(completion: nil)
-        self.dismiss(animated: false, completion: nil)
     }
     
     @objc func sendChannelMessage(text: String) {
@@ -533,10 +550,6 @@ class ARVideoViewController: ARBaseViewController {
             UIDevice.current.setValue(NSNumber(value: UIInterfaceOrientation.portrait.rawValue), forKey: "orientation")
             
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
-                self.titleLabel.attributed.text = .init("""
-                 \(infoVideoModel.roomName!, .font(UIFont(name: PingFangBold, size: 16)!), .foreground(UIColor.white))
-                 """)
-                
                 self.bottomStackView.backgroundColor = UIColor.clear
                 self.bottomPadding.constant = 74
                 self.topPadding.constant = 88
@@ -557,13 +570,8 @@ class ARVideoViewController: ARBaseViewController {
             UIDevice.current.setValue(NSNumber(value: UIInterfaceOrientation.landscapeRight.rawValue), forKey: "orientation")
             
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
-                
                 let stackView = self.view.viewWithTag(100) as! UIStackView
                 stackView.axis = .horizontal
-                
-                self.titleLabel.attributed.text = .init("""
-                 \(infoVideoModel.roomName!, .font(UIFont(name: PingFangBold, size: 16)!), .foreground(UIColor.white))
-                 """)
                 
                 self.bottomStackView.backgroundColor = UIColor(hexString: "#434343")
                 self.topPadding.constant = 0

@@ -54,9 +54,10 @@ class RefreshGifHeader: MJRefreshHeader {
 }
 
 class ARMainViewController: UICollectionViewController {
-    
     private var flowLayout: UICollectionViewFlowLayout!
     private var index = 0
+    private let blacklistIdentifier = "blacklistIdentifier"
+    private var blackList = NSMutableArray()
     
     var modelArr = [ARMainRoomListModel]()
     
@@ -75,10 +76,12 @@ class ARMainViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         (UserDefaults.string(forKey: .uid) != nil) ? login() : registered()
+        let arr = UserDefaults.standard.array(forKey: blacklistIdentifier)
+        arr?.count ?? 0 > 0 ? (blackList.addObjects(from: arr!)) : nil
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
+        
         // Do any additional setup after loading the view.
         flowLayout = UICollectionViewFlowLayout.init()
         flowLayout.sectionInset = UIEdgeInsets(top: 15, left: 15, bottom: 0, right: 15)
@@ -104,7 +107,10 @@ class ARMainViewController: UICollectionViewController {
                     modelArr.removeAll()
                     let jsonArr = result["data"].arrayValue
                     for json in jsonArr {
-                        self.modelArr.append(ARMainRoomListModel(jsonData: json))
+                        let roomModel = ARMainRoomListModel(jsonData: json)
+                        if !blackList.contains(roomModel.roomId as Any) {
+                            self.modelArr.append(roomModel)
+                        }
                     }
                 }
                 
@@ -162,6 +168,28 @@ class ARMainViewController: UICollectionViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: titleLabel)
         collectionView.mj_header?.beginRefreshing()
     }
+    
+    private func setRoomToBlack(roomId: String) {
+        //拉黑
+        var arr = UserDefaults.standard.array(forKey: blacklistIdentifier)
+        if arr?.count ?? 0 > 0 {
+            arr?.append(roomId as Any)
+        } else {
+            arr = [roomId as Any]
+        }
+        UserDefaults.standard.setValue(arr, forKey: blacklistIdentifier)
+        
+        for index in 0..<modelArr.count {
+            let roomModel = modelArr[index]
+            if roomModel.roomId == roomId {
+                modelArr.remove(at: index)
+                placeholder.isHidden = (modelArr.count != 0)
+                collectionView.reloadData()
+                break
+            }
+        }
+        blackList.add(roomId)
+    }
 
     // MARK: UICollectionViewDataSource
 
@@ -172,17 +200,24 @@ class ARMainViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let collectionViewCell: ARMainViewCell! = (collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ARMainViewCell)
-        collectionViewCell.listModel = modelArr[indexPath.row]
+        let roomModel = modelArr[indexPath.row]
+        collectionViewCell.updateMainCell(listModel: roomModel, row: indexPath.row)
+        
+        collectionViewCell?.onButtonTapped = { [weak self] (tag) in
+            guard let weakself = self else { return }
+            
+            if tag == 50 {
+                UIAlertController.showAlert(in: self!, withTitle: "屏蔽", message: "屏蔽该自习室", cancelButtonTitle: "取消", destructiveButtonTitle: nil, otherButtonTitles: ["确定"]) { (alertVc, action, index) in
+                    if index == 2 {
+                        weakself.setRoomToBlack(roomId: roomModel.roomId!)
+                    }
+                }
+            } else if tag == 51 {
+                weakself.requestJoinRoom(roomId: roomModel.roomId!)
+            }
+        }
         return collectionViewCell
     }
-
-    // MARK: UICollectionViewDelegate
-    
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let listModel: ARMainRoomListModel = modelArr[indexPath.row]
-        requestJoinRoom(roomId: listModel.roomId!)
-    }
-
 }
 
 class ARMainViewCell: UICollectionViewCell {
@@ -190,27 +225,30 @@ class ARMainViewCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var containerView: UIView!
     
-    var listModel: ARMainRoomListModel? {
-        didSet {
-            let firstcharacter: Character = (listModel?.roomName?.characterAtIndex(index: 0))!
-            titleLabel.attributed.text = """
-             \(firstcharacter, .foreground(UIColor(hexString: "#FF4316")), .font(UIFont(name: PingFangBold, size: 24)!))\(" 号自习室", .foreground(UIColor(hexString: "#171717")), .font(UIFont(name: PingFangBold, size: 14)!), .baselineOffset(3))
-             """
-            
-            for index in 0...3 {
-                let headImageView = containerView.viewWithTag(index + 1)! as! UIImageView
-                headImageView.layer.cornerRadius = ((ARScreenWidth - 40)/2 - 32)/4
-                if index < listModel?.avatars.count ?? 0 {
-                    let url = listModel?.avatars[index]
-                    if url?.count != 0 {
-                        headImageView.sd_setImage(with: NSURL(string: listModel?.avatars[index] ?? "") as URL?, placeholderImage: UIImage(named: "icon_head"))
-                    } else {
-                        headImageView.image = UIImage(named: "icon_placeholder")
-                    }
-                } else {
-                    headImageView.image = UIImage(named: "icon_placeholder")
+    var onButtonTapped : ((_ tag: NSInteger) -> Void)? = nil
+    
+    func updateMainCell(listModel: ARMainRoomListModel?, row: NSInteger) {
+        let firstcharacter: Character = (listModel?.roomName?.characterAtIndex(index: 0))!
+        titleLabel.attributed.text = """
+         \(firstcharacter, .foreground(UIColor(hexString: "#FF4316")), .font(UIFont(name: PingFangBold, size: 24)!))\(" 号自习室", .foreground(UIColor(hexString: "#171717")), .font(UIFont(name: PingFangBold, size: 14)!), .baselineOffset(3))
+         """
+
+        for index in 0...3 {
+            let headImageView = containerView.viewWithTag(index + 1)! as! UIImageView
+            headImageView.layer.cornerRadius = ((ARScreenWidth - 40)/2 - 32)/4
+            headImageView.image = UIImage(named: "icon_placeholder")
+            if index < listModel?.avatars.count ?? 0 && row != 4 {
+                let url = listModel?.avatars[index]
+                if url?.count != 0 {
+                    headImageView.sd_setImage(with: NSURL(string: listModel?.avatars[index] ?? "") as URL?, placeholderImage: UIImage(named: "icon_head"))
                 }
             }
+        }
+    }
+    
+    @IBAction func didClickMainCellButton(_ sender: UIButton) {
+        if let onButtonTapped = self.onButtonTapped {
+            onButtonTapped(sender.tag)
         }
     }
 }
