@@ -475,7 +475,7 @@ class ARVideoViewController: ARBaseViewController {
             
             chatTextField.text = ""
             chatTextField.resignFirstResponder()
-            confirmButton.alpha = 0.3
+//            confirmButton.alpha = 0.3
         }
     }
     

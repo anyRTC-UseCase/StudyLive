@@ -91,6 +91,7 @@ class ARBaseViewController: UIViewController {
     
     @objc public func didSendChatTextField() {
         // 发送消息
+        
     }
     
     @objc public func sendRandomImage() {
@@ -99,6 +100,11 @@ class ARBaseViewController: UIViewController {
     
     @objc func keyboardChange(notify:NSNotification){
         if chatTextField.isFirstResponder {
+            if isBlank(text: chatTextField.text) || stringAllIsEmpty(string: chatTextField.text ?? "") {
+                confirmButton.setTitleColor(UIColor(hexString: "#434343"), for: .normal)
+            } else {
+                confirmButton.setTitleColor(UIColor(hexString: "#FF4316"), for: .normal)
+            }
             //时间
             let duration : Double = notify.userInfo![UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
             if notify.name == UIResponder.keyboardWillShowNotification {
